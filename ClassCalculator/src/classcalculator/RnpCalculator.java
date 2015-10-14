@@ -17,6 +17,9 @@ public class RnpCalculator extends javax.swing.JFrame {
     /**
      * Creates new form RnpCalculator
      */
+    String[] storedValues;
+    String display = "";
+    int recall;
     ClassCalculator cal = new ClassCalculator();
     int period,numPer=0,count = 0,counter=0,numOfPayments,paymentNum=0;
     double amount,rate,payment;
@@ -53,6 +56,13 @@ public class RnpCalculator extends javax.swing.JFrame {
         
         f.setMaximumFractionDigits(9);
         f.setMinimumFractionDigits(0);
+        
+        
+         storedValues = new String[3];
+
+        storedValues[0] = "No value stored";
+        storedValues[1] = "No value stored";
+        storedValues[2] = "No value stored";
         //sipho
     }
 
@@ -192,12 +202,27 @@ public class RnpCalculator extends javax.swing.JFrame {
 
         STO1.setForeground(new java.awt.Color(51, 255, 51));
         STO1.setText("STO 1");
+        STO1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                STO1ActionPerformed(evt);
+            }
+        });
 
         STO2.setForeground(new java.awt.Color(51, 255, 51));
         STO2.setText("STO 2");
+        STO2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                STO2ActionPerformed(evt);
+            }
+        });
 
         ST03.setForeground(new java.awt.Color(51, 255, 51));
         ST03.setText("STO 3");
+        ST03.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ST03ActionPerformed(evt);
+            }
+        });
 
         CLRSTO.setForeground(new java.awt.Color(153, 0, 204));
         CLRSTO.setText("CLR STO REG");
@@ -302,6 +327,11 @@ public class RnpCalculator extends javax.swing.JFrame {
         });
 
         RCL.setText("RCL");
+        RCL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RCLActionPerformed(evt);
+            }
+        });
 
         Multiplication.setText("*");
         Multiplication.addActionListener(new java.awt.event.ActionListener() {
@@ -681,6 +711,14 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
+         
+            if (recall == 1) {
+            jTextArea1.setText(storedValues[2]);
+            recall = 0;
+        } else {
+            display += 3;
+            jTextArea1.setText(display);
+        }
     }//GEN-LAST:event_ThreeActionPerformed
 
     private void TwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TwoActionPerformed
@@ -699,7 +737,15 @@ public class RnpCalculator extends javax.swing.JFrame {
             flag = false;
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
-        } 
+        }
+        
+         if (recall == 1) {
+            jTextArea1.setText(storedValues[1]);
+            recall = 0;
+        } else {
+            display += 2;
+            jTextArea1.setText(display);
+        }
     }//GEN-LAST:event_TwoActionPerformed
 
     private void OneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OneActionPerformed
@@ -722,6 +768,13 @@ public class RnpCalculator extends javax.swing.JFrame {
         }
         
         //sipho
+               if (recall == 1) {
+            jTextArea1.setText(storedValues[0]);
+            recall = 0;
+        } else {
+            display += 1;
+            jTextArea1.setText(display);
+        }
     }//GEN-LAST:event_OneActionPerformed
 
     private void FourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FourActionPerformed
@@ -739,6 +792,8 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
+         display += 4;
+        jTextArea1.setText(display);
     }//GEN-LAST:event_FourActionPerformed
 
     private void FiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiveActionPerformed
@@ -759,6 +814,8 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         } 
+         display += 5;
+        jTextArea1.setText(display);
     }//GEN-LAST:event_FiveActionPerformed
 
     private void SixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SixActionPerformed
@@ -781,6 +838,9 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
+       
+        display += 6;
+        jTextArea1.setText(display);
     }//GEN-LAST:event_SixActionPerformed
 
     private void SevenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SevenActionPerformed
@@ -800,6 +860,9 @@ public class RnpCalculator extends javax.swing.JFrame {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
          //sipho
+         
+         display += 7;
+        jTextArea1.setText(display);
     }//GEN-LAST:event_SevenActionPerformed
 
     private void EightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EightActionPerformed
@@ -818,6 +881,9 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
+        
+         display += 8;
+        jTextArea1.setText(display);
     }//GEN-LAST:event_EightActionPerformed
 
     private void NineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NineActionPerformed
@@ -836,6 +902,9 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
+        
+        display += 9;
+        jTextArea1.setText(display);
     }//GEN-LAST:event_NineActionPerformed
 
     private void ZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZeroActionPerformed
@@ -855,12 +924,18 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
+        
+        display += 0;
+        jTextArea1.setText(display);
     }//GEN-LAST:event_ZeroActionPerformed
 
     private void ExponentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExponentActionPerformed
         // TODO add your handling code here:
          Exponent.setText(" 2.718");
         int Exponent = Integer.parseInt(" 2.718");
+        
+         display += "E";
+        jTextArea1.setText(display);
     }//GEN-LAST:event_ExponentActionPerformed
 
     private void DotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DotActionPerformed
@@ -868,6 +943,9 @@ public class RnpCalculator extends javax.swing.JFrame {
            isFraction = true;
        
         appendFraction(".");
+        
+         display += ".";
+        jTextArea1.setText(display);
     }//GEN-LAST:event_DotActionPerformed
 
     private void MultiplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MultiplicationActionPerformed
@@ -1199,6 +1277,32 @@ public class RnpCalculator extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_calcSwapBtnActionPerformed
+
+    private void ST03ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ST03ActionPerformed
+        // TODO add your handling code here:
+        storedValues[2] = jTextArea1.getText();
+        jTextArea1.setText(null);
+        display = "";
+    }//GEN-LAST:event_ST03ActionPerformed
+
+    private void STO2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STO2ActionPerformed
+        // TODO add your handling code here:
+        storedValues[1] = jTextArea1.getText();
+        jTextArea1.setText(null);
+        display = "";
+    }//GEN-LAST:event_STO2ActionPerformed
+
+    private void STO1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STO1ActionPerformed
+        // TODO add your handling code here:
+          storedValues[0] = jTextArea1.getText();
+        jTextArea1.setText(null);
+        display = "";
+    }//GEN-LAST:event_STO1ActionPerformed
+
+    private void RCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RCLActionPerformed
+        // TODO add your handling code here:
+        recall = 1;
+    }//GEN-LAST:event_RCLActionPerformed
 
     /**
      * @param args the command line arguments
