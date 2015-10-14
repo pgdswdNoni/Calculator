@@ -3,11 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classcalculator;
+package pgdswd;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import java.util.EmptyStackException;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
 /**
  *
  * @author User1
@@ -17,12 +28,10 @@ public class RnpCalculator extends javax.swing.JFrame {
     /**
      * Creates new form RnpCalculator
      */
-    //changed
-    String[] storedValues;
-    String display = "";
-    int recall;
-    ClassCalculator cal = new ClassCalculator();
     
+    JEditorPane pane = new JEditorPane();
+    JFrame frame;
+    CalculatorFunctions cal = new CalculatorFunctions();
     int period,numPer=0,count = 0,counter=0,numOfPayments,paymentNum=0;
     double amount,rate,payment;
     double numAmt=0,numRate =0,paymentAmt=0;
@@ -58,14 +67,14 @@ public class RnpCalculator extends javax.swing.JFrame {
         
         f.setMaximumFractionDigits(9);
         f.setMinimumFractionDigits(0);
-        
-        
-         storedValues = new String[3];
-
-        storedValues[0] = "No value stored";
-        storedValues[1] = "No value stored";
-        storedValues[2] = "No value stored";
         //sipho
+    }
+    
+    public RnpCalculator(JFrame frame){
+         frame = new JFrame();
+         
+         frame.setVisible(true);
+         frame.pack();
     }
 
     /**
@@ -78,6 +87,7 @@ public class RnpCalculator extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton15 = new javax.swing.JButton();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -117,15 +127,17 @@ public class RnpCalculator extends javax.swing.JFrame {
         jButton35 = new javax.swing.JButton();
         jButton36 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        calcSwapBtn = new javax.swing.JButton();
-        squaredButton = new javax.swing.JButton();
-        squareRootButton = new javax.swing.JButton();
-        squaredNumButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        Help = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jButton15.setText("jButton15");
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,27 +219,12 @@ public class RnpCalculator extends javax.swing.JFrame {
 
         STO1.setForeground(new java.awt.Color(51, 255, 51));
         STO1.setText("STO 1");
-        STO1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                STO1ActionPerformed(evt);
-            }
-        });
 
         STO2.setForeground(new java.awt.Color(51, 255, 51));
         STO2.setText("STO 2");
-        STO2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                STO2ActionPerformed(evt);
-            }
-        });
 
         ST03.setForeground(new java.awt.Color(51, 255, 51));
         ST03.setText("STO 3");
-        ST03.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ST03ActionPerformed(evt);
-            }
-        });
 
         CLRSTO.setForeground(new java.awt.Color(153, 0, 204));
         CLRSTO.setText("CLR STO REG");
@@ -332,11 +329,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         });
 
         RCL.setText("RCL");
-        RCL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RCLActionPerformed(evt);
-            }
-        });
 
         Multiplication.setText("*");
         Multiplication.addActionListener(new java.awt.event.ActionListener() {
@@ -386,34 +378,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         jButton36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton36ActionPerformed(evt);
-            }
-        });
-
-        calcSwapBtn.setText("Choose Calc");
-        calcSwapBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calcSwapBtnActionPerformed(evt);
-            }
-        });
-
-        squaredButton.setText("x^2");
-        squaredButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                squaredButtonActionPerformed(evt);
-            }
-        });
-
-        squareRootButton.setText("√");
-        squareRootButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                squareRootButtonActionPerformed(evt);
-            }
-        });
-
-        squaredNumButton.setText("x^y");
-        squaredNumButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                squaredNumButtonActionPerformed(evt);
             }
         });
 
@@ -502,26 +466,13 @@ public class RnpCalculator extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(Division, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(pButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(squaredButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(squaredNumButton))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton36)
-                                            .addComponent(Clearall))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(3, 3, 3)
-                                                .addComponent(calcSwapBtn))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(38, 38, 38)
-                                                .addComponent(squareRootButton))))))))
+                                        .addComponent(pButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Clearall)
+                                    .addComponent(jButton36)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,32 +532,47 @@ public class RnpCalculator extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Multiplication)
                             .addComponent(Division)
-                            .addComponent(pButton)
-                            .addComponent(squaredButton)
-                            .addComponent(squaredNumButton))
+                            .addComponent(pButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Subtraction)
-                            .addComponent(Clearall)
-                            .addComponent(squareRootButton))
+                            .addComponent(Clearall))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton35)
-                            .addComponent(jButton36)
-                            .addComponent(calcSwapBtn))))
+                            .addComponent(jButton36))))
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Edit");
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
-        Help.setText("Help");
-        Help.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.setText("Help");
+
+        jMenuItem5.setText("Help Content");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HelpActionPerformed(evt);
+                jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenuBar1.add(Help);
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Online Help");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem4.setText("About");
+        jMenu2.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -650,30 +616,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         
         //displayPane.setText("");
     }//GEN-LAST:event_ClearallActionPerformed
-
-    private void HelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Help Dialog"," This is an RPN Calculator; the "
-                + "operator  buttons execute operations. Eg , to mutiply 2 and 3, press"
-                + "2 ENTER 3 x and the result 6.00 will appear."
-                + "All results show two decimal places- cents  as this is a financial calculator."
-                + "Pressing the P button  and then  a function button such as PV will display a list"
-                + "of values  to enter in the order to be entered."
-                + "To use the function, click  the numbers to enter  the first value, click Enter"
-                + "continue for each required value except the last-click the functiob button required"
-                + "once the last value has been entered into the window,"
-                + "and the result will appear"
-                + "Too; tip texts  will display when the mouse pointer is held"
-                + "over a non-numeric button."
-                + "You can enter as many values as you like clicking 'ENTER'"
-                + "after each one; this will push all these values on the stack."
-                + "Each operator button clicked thereafter will operate on the "
-                + "value in the window  and the next value on the stack , i.e."
-                + "2 ENTER 3  ENTER 5 + x will produce 16.00"
-                + "The STO buttons  will store  the value in the window in register"
-                + "number on the button; to recall the value click RCL followed by the numberic "
-                + "button that corresponds to the register number",JOptionPane.OK_OPTION);
-    }//GEN-LAST:event_HelpActionPerformed
 
     private void PVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PVActionPerformed
         // TODO add your handling code here:
@@ -749,14 +691,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
-         
-            if (recall == 1) {
-            jTextArea1.setText(storedValues[2]);
-            recall = 0;
-        } else {
-            display += 3;
-            jTextArea1.setText(display);
-        }
     }//GEN-LAST:event_ThreeActionPerformed
 
     private void TwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TwoActionPerformed
@@ -775,15 +709,7 @@ public class RnpCalculator extends javax.swing.JFrame {
             flag = false;
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
-        }
-        
-         if (recall == 1) {
-            jTextArea1.setText(storedValues[1]);
-            recall = 0;
-        } else {
-            display += 2;
-            jTextArea1.setText(display);
-        }
+        } 
     }//GEN-LAST:event_TwoActionPerformed
 
     private void OneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OneActionPerformed
@@ -806,13 +732,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         }
         
         //sipho
-               if (recall == 1) {
-            jTextArea1.setText(storedValues[0]);
-            recall = 0;
-        } else {
-            display += 1;
-            jTextArea1.setText(display);
-        }
     }//GEN-LAST:event_OneActionPerformed
 
     private void FourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FourActionPerformed
@@ -830,8 +749,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
-         display += 4;
-        jTextArea1.setText(display);
     }//GEN-LAST:event_FourActionPerformed
 
     private void FiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiveActionPerformed
@@ -852,8 +769,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         } 
-         display += 5;
-        jTextArea1.setText(display);
     }//GEN-LAST:event_FiveActionPerformed
 
     private void SixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SixActionPerformed
@@ -876,9 +791,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
-       
-        display += 6;
-        jTextArea1.setText(display);
     }//GEN-LAST:event_SixActionPerformed
 
     private void SevenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SevenActionPerformed
@@ -898,9 +810,6 @@ public class RnpCalculator extends javax.swing.JFrame {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
          //sipho
-         
-         display += 7;
-        jTextArea1.setText(display);
     }//GEN-LAST:event_SevenActionPerformed
 
     private void EightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EightActionPerformed
@@ -919,9 +828,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
-        
-         display += 8;
-        jTextArea1.setText(display);
     }//GEN-LAST:event_EightActionPerformed
 
     private void NineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NineActionPerformed
@@ -940,9 +846,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
-        
-        display += 9;
-        jTextArea1.setText(display);
     }//GEN-LAST:event_NineActionPerformed
 
     private void ZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZeroActionPerformed
@@ -962,18 +865,12 @@ public class RnpCalculator extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText() + number);
         }
-        
-        display += 0;
-        jTextArea1.setText(display);
     }//GEN-LAST:event_ZeroActionPerformed
 
     private void ExponentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExponentActionPerformed
         // TODO add your handling code here:
          Exponent.setText(" 2.718");
         int Exponent = Integer.parseInt(" 2.718");
-        
-         display += "E";
-        jTextArea1.setText(display);
     }//GEN-LAST:event_ExponentActionPerformed
 
     private void DotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DotActionPerformed
@@ -981,9 +878,6 @@ public class RnpCalculator extends javax.swing.JFrame {
            isFraction = true;
        
         appendFraction(".");
-        
-         display += ".";
-        jTextArea1.setText(display);
     }//GEN-LAST:event_DotActionPerformed
 
     private void MultiplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MultiplicationActionPerformed
@@ -1309,147 +1203,51 @@ public class RnpCalculator extends javax.swing.JFrame {
         stack.pop();
     }//GEN-LAST:event_jButton35ActionPerformed
 
-    private void calcSwapBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcSwapBtnActionPerformed
-        // Code to choose between a normal and fin calculator
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        URL fUrl = null;
         
+       
+        File htmlFile = new File("questions.html");
+        try {
+            Desktop.getDesktop().browse(htmlFile.toURI());
+            /*try {
+            URL myURL = new URL("file:///home/pgdswd/NetBeansProjects/JavaApplication20RNP/src/pgdswd/questions.html");
+            URLConnection myURLConnection = myURL.openConnection();
+            myURLConnection.connect();
+            System.out.println("connected");
+            }
+            catch (MalformedURLException e) {
+            // new URL() failed
+            // ...
+            System.out.println("Wrong url");
+            }
+            catch (IOException e) {
+            // openConnection() failed
+            // ...
+            System.out.println("coonection failed");
+        }*/ } catch (IOException ex) {
+            Logger.getLogger(RnpCalculator.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        
-    }//GEN-LAST:event_calcSwapBtnActionPerformed
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void ST03ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ST03ActionPerformed
-        // TODO add your handling code here:
-        storedValues[2] = jTextArea1.getText();
-        jTextArea1.setText(null);
-        display = "";
-    }//GEN-LAST:event_ST03ActionPerformed
-
-    private void STO2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STO2ActionPerformed
-        // TODO add your handling code here:
-        storedValues[1] = jTextArea1.getText();
-        jTextArea1.setText(null);
-        display = "";
-    }//GEN-LAST:event_STO2ActionPerformed
-
-    private void STO1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STO1ActionPerformed
-        // TODO add your handling code here:
-          storedValues[0] = jTextArea1.getText();
-        jTextArea1.setText(null);
-        display = "";
-    }//GEN-LAST:event_STO1ActionPerformed
-
-    private void RCLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RCLActionPerformed
-        // TODO add your handling code here:
-        recall = 1;
-    }//GEN-LAST:event_RCLActionPerformed
-
-    private void squaredButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squaredButtonActionPerformed
-                     flag = true;
-        double n1 = 0,n2 = 0, squared = 0;
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+     
+        JFrame frame2 = new JFrame();
         
-        stack.push(jTextArea1.getText());
-        
-        try{
-       n1 = Double.parseDouble(stack.pop());
-        //n2 = Double.parseDouble(stack.pop());
-        
-        
-        if( n1 != 0 )
-            
-        {
-        //sum = n2 / n1;
-        squared = n1*n1;
-        
-        
-       // stack.push(String.valueOf(displayPane.getText()));
-        jTextArea1.setText(String.valueOf(form.format(squared)));
-        }
-        
-        else if(n1 == 0){
-            jTextArea1.setText(String.valueOf(form.format(squared)));
-        }else
-        {
-            jTextArea1.setText("NaN");
-        }
-        }
-         catch(EmptyStackException e)
-        {
-           jTextArea1.setText("Syntax Error"); 
-        }
-        catch(NumberFormatException e)
-        {
-            jTextArea1.setText("Invalid Value");
-        }
-    }//GEN-LAST:event_squaredButtonActionPerformed
-
-    private void squaredNumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squaredNumButtonActionPerformed
-              flag = true;
-        double n1 = 0,n2 = 0, squared = 0;
-        
-        stack.push(jTextArea1.getText());
-        
-        try{
-       n1 = Double.parseDouble(stack.pop());
-        n2 = Double.parseDouble(stack.pop());
+        /*JButton jb = new JButton();
+        pane.setVisible(true);
+        rootPane.add(pane);
+  
+        frame.setVisible(true);*/
+        NewJFrame nf = new NewJFrame();
+        nf.setVisible(true);
+       // calc.setVisible(true);
         
         
         
-        //sum = n2 / n1;
-       // stack.push(String.valueOf(displayPane.getText()));
-        squared = Math.pow(n2, n1);
-           
-        jTextArea1.setText(String.valueOf(form.format(squared)));
         
-        
-        
-        }
-         catch(EmptyStackException e)
-        {
-           jTextArea1.setText("Syntax Error"); 
-        }
-        catch(NumberFormatException e)
-        {
-            jTextArea1.setText("Invalid Value");
-        }
-    }//GEN-LAST:event_squaredNumButtonActionPerformed
-
-    private void squareRootButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareRootButtonActionPerformed
-                    flag = true;
-        double n1 = 0,n2 = 0, squared = 0;
-        
-        stack.push(jTextArea1.getText());
-        
-        try{
-       n1 = Double.parseDouble(stack.pop());
-        //n2 = Double.parseDouble(stack.pop());
-        
-        
-        if( n1 != 0 )
-            
-        {
-        //sum = n2 / n1;
-        //squared = n1*n1;
-        squared = Math.sqrt(n1);
-        
-       // stack.push(String.valueOf(displayPane.getText()));
-        jTextArea1.setText(String.valueOf(form.format(squared)));
-        }
-        
-        else if(n1 == 0){
-            jTextArea1.setText(String.valueOf(form.format(squared)));
-        }else
-        {
-            jTextArea1.setText("NaN");
-        }
-        }
-         catch(EmptyStackException e)
-        {
-           jTextArea1.setText("Syntax Error"); 
-        }
-        catch(NumberFormatException e)
-        {
-            jTextArea1.setText("Invalid Value");
-        }
-    }//GEN-LAST:event_squareRootButtonActionPerformed
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1476,7 +1274,6 @@ public class RnpCalculator extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RnpCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -1592,7 +1389,6 @@ public  void numbers(int num){
     private javax.swing.JButton FVad;
     private javax.swing.JButton Five;
     private javax.swing.JButton Four;
-    private javax.swing.JMenu Help;
     private javax.swing.JButton Multiplication;
     private javax.swing.JButton Nine;
     private javax.swing.JButton One;
@@ -1610,20 +1406,22 @@ public  void numbers(int num){
     private javax.swing.JButton Three;
     private javax.swing.JButton Two;
     private javax.swing.JButton Zero;
-    private javax.swing.JButton calcSwapBtn;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton35;
     private javax.swing.JButton jButton36;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton n;
     private javax.swing.JButton pButton;
-    private javax.swing.JButton squareRootButton;
-    private javax.swing.JButton squaredButton;
-    private javax.swing.JButton squaredNumButton;
     // End of variables declaration//GEN-END:variables
 }

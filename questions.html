@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <script>
+            function postQ(){
+                var quest = "";
+                
+                quest = document.getElementById("askarea").value;
+                document.getElementById("ques").innerHTML = "Your question is posted" + 
+                        "<br><br><br>" + quest + "<br>" ;
+            }
+        </script>
+        <title>RPN Calculator </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="questions.css" type="text/css">
+    </head>
+    <body>
+        
+        <div id="header">
+            <h1>RPN Calculator Forum</h1> 
+            <h2>Post a question</h2>
+            
+            
+        </div>
+        
+        <div id="content">
+            <textarea id="askarea" placeholder="What would you like to ask?">
+                
+            
+            </textarea>
+            <br>
+            <input type="button" value="Post question" onclick="postQ();">
+            
+            <br><br><br>
+            
+            <div id="ques">
+                
+                
+            </div>
+            
+        </div>
+    </body>
+</html>
