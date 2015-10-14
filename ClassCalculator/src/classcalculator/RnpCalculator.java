@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package classcalculator;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import java.util.EmptyStackException;
@@ -121,6 +122,7 @@ public class RnpCalculator extends javax.swing.JFrame {
         squaredButton = new javax.swing.JButton();
         squareRootButton = new javax.swing.JButton();
         squaredNumButton = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Help = new javax.swing.JMenu();
@@ -417,6 +419,13 @@ public class RnpCalculator extends javax.swing.JFrame {
             }
         });
 
+        jRadioButton1.setText("Use Keyboard");
+        jRadioButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jRadioButton1KeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -425,6 +434,7 @@ public class RnpCalculator extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(FVad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -521,7 +531,7 @@ public class RnpCalculator extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,7 +604,9 @@ public class RnpCalculator extends javax.swing.JFrame {
                             .addComponent(jButton35)
                             .addComponent(jButton36)
                             .addComponent(calcSwapBtn))))
-                .addGap(0, 43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButton1)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -1451,6 +1463,97 @@ public class RnpCalculator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_squareRootButtonActionPerformed
 
+    private void jRadioButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jRadioButton1KeyPressed
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_1 :
+                OneActionPerformed(null);
+                break;
+
+            case KeyEvent.VK_2:
+                TwoActionPerformed(null);
+                break;
+            case KeyEvent.VK_3:
+                ThreeActionPerformed(null);
+                break;
+            case KeyEvent.VK_4:
+                FourActionPerformed(null);
+                break;
+            case KeyEvent.VK_5:
+                FiveActionPerformed(null);
+                break;
+            case KeyEvent.VK_6:
+                SixActionPerformed(null);
+                break;
+            case KeyEvent.VK_7:
+                    SevenActionPerformed(null);
+                    break;
+            case KeyEvent.VK_8:
+                    EightActionPerformed(null);
+                    break;
+            case KeyEvent.VK_9:
+                    NineActionPerformed(null);
+                    break;
+            case KeyEvent.VK_0:
+                    ZeroActionPerformed(null);
+                    break;
+                
+                case KeyEvent.VK_NUMPAD1 :
+                OneActionPerformed(null);
+                break;
+
+            case KeyEvent.VK_NUMPAD2:
+                TwoActionPerformed(null);
+                break;
+            case KeyEvent.VK_NUMPAD3:
+                ThreeActionPerformed(null);
+                break;
+            case KeyEvent.VK_NUMPAD4:
+                FourActionPerformed(null);
+                break;
+            case KeyEvent.VK_NUMPAD5:
+                FiveActionPerformed(null);
+                break;
+            case KeyEvent.VK_NUMPAD6:
+                SixActionPerformed(null);
+                break;
+            case KeyEvent.VK_NUMPAD7:
+                    SevenActionPerformed(null);
+                    break;
+            case KeyEvent.VK_NUMPAD8:
+                    EightActionPerformed(null);
+                    break;
+            case KeyEvent.VK_NUMPAD9:
+                    NineActionPerformed(null);
+                    break;
+            case KeyEvent.VK_NUMPAD0:
+                    ZeroActionPerformed(null);
+                    break;
+                
+                case KeyEvent.VK_ENTER:
+                    EnterActionPerformed(null);
+                    break;
+                    
+                    case KeyEvent.VK_SUBTRACT:
+                    SubtractionActionPerformed(null);
+                    break;
+                        
+                case KeyEvent.VK_DIVIDE:
+                    DivisionActionPerformed(null);
+                    break;
+                    
+                case KeyEvent.VK_MULTIPLY:
+                    MultiplicationActionPerformed(null);
+                    break;
+                    
+                    case KeyEvent.VK_PLUS:
+                    AdditionActionPerformed(null);
+                    break;
+                    
+                    
+            
+        
+    }//GEN-LAST:event_jRadioButton1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -1618,6 +1721,7 @@ public  void numbers(int num){
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton n;
