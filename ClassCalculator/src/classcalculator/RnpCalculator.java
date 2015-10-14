@@ -22,7 +22,7 @@ public class RnpCalculator extends javax.swing.JFrame {
     String[] storedValues;
     String display = "";
     int recall;
-    ClassCalculator cal = new ClassCalculator();
+    CalculatorFunctions cal = new CalculatorFunctions();
     
     int period,numPer=0,count = 0,counter=0,numOfPayments,paymentNum=0;
     double amount,rate,payment;
