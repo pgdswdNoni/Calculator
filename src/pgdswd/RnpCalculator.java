@@ -28,7 +28,7 @@ public class RnpCalculator extends javax.swing.JFrame {
     /**
      * Creates new form RnpCalculator
      */
-    
+    //Sifiso
     JEditorPane pane = new JEditorPane();
     JFrame frame;
     CalculatorFunctions cal = new CalculatorFunctions();
