@@ -1210,8 +1210,8 @@ public class RnpCalculator extends javax.swing.JFrame {
         File htmlFile = new File("questions.html");
         try {
             Desktop.getDesktop().browse(htmlFile.toURI());
-            /*try {
-            URL myURL = new URL("file:///home/pgdswd/NetBeansProjects/JavaApplication20RNP/src/pgdswd/questions.html");
+            try {
+            URL myURL = new URL("http://www.google.com");
             URLConnection myURLConnection = myURL.openConnection();
             myURLConnection.connect();
             System.out.println("connected");
@@ -1225,7 +1225,7 @@ public class RnpCalculator extends javax.swing.JFrame {
             // openConnection() failed
             // ...
             System.out.println("coonection failed");
-        }*/ } catch (IOException ex) {
+        } } catch (IOException ex) {
             Logger.getLogger(RnpCalculator.class.getName()).log(Level.SEVERE, null, ex);
         }
         
