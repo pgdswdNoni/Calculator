@@ -9,10 +9,10 @@ and open the template in the editor.
         <script>
             function postQ(){
                 var quest = "";
-                
+                var date = new Date();
                 quest = document.getElementById("askarea").value;
-                document.getElementById("ques").innerHTML = "Your question is posted" + 
-                        "<br>" + quest + "<br>" ;
+                document.getElementById("ques").innerHTML = "Your question is posted" + "<br>"
+                        date + "<br>" + quest + "<br>" ;
             }
         </script>
         <title>RPN Calculator </title>
