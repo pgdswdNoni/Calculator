@@ -21,6 +21,7 @@ public class RnpCalculator extends javax.swing.JFrame {
     String display = "";
     int recall;
     ClassCalculator cal = new ClassCalculator();
+    
     int period,numPer=0,count = 0,counter=0,numOfPayments,paymentNum=0;
     double amount,rate,payment;
     double numAmt=0,numRate =0,paymentAmt=0;
@@ -116,6 +117,9 @@ public class RnpCalculator extends javax.swing.JFrame {
         jButton36 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         calcSwapBtn = new javax.swing.JButton();
+        squaredButton = new javax.swing.JButton();
+        squareRootButton = new javax.swing.JButton();
+        squaredNumButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Help = new javax.swing.JMenu();
@@ -391,6 +395,27 @@ public class RnpCalculator extends javax.swing.JFrame {
             }
         });
 
+        squaredButton.setText("x^2");
+        squaredButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                squaredButtonActionPerformed(evt);
+            }
+        });
+
+        squareRootButton.setText("√");
+        squareRootButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                squareRootButtonActionPerformed(evt);
+            }
+        });
+
+        squaredNumButton.setText("x^y");
+        squaredNumButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                squaredNumButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -476,17 +501,26 @@ public class RnpCalculator extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(Division, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(pButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(pButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(squaredButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(squaredNumButton))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jButton36)
                                             .addComponent(Clearall))
-                                        .addGap(3, 3, 3)
-                                        .addComponent(calcSwapBtn))))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(3, 3, 3)
+                                                .addComponent(calcSwapBtn))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(38, 38, 38)
+                                                .addComponent(squareRootButton))))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,11 +580,14 @@ public class RnpCalculator extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Multiplication)
                             .addComponent(Division)
-                            .addComponent(pButton))
+                            .addComponent(pButton)
+                            .addComponent(squaredButton)
+                            .addComponent(squaredNumButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Subtraction)
-                            .addComponent(Clearall))
+                            .addComponent(Clearall)
+                            .addComponent(squareRootButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton35)
@@ -1304,6 +1341,115 @@ public class RnpCalculator extends javax.swing.JFrame {
         recall = 1;
     }//GEN-LAST:event_RCLActionPerformed
 
+    private void squaredButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squaredButtonActionPerformed
+                     flag = true;
+        double n1 = 0,n2 = 0, squared = 0;
+        
+        stack.push(jTextArea1.getText());
+        
+        try{
+       n1 = Double.parseDouble(stack.pop());
+        //n2 = Double.parseDouble(stack.pop());
+        
+        
+        if( n1 != 0 )
+            
+        {
+        //sum = n2 / n1;
+        squared = n1*n1;
+        
+        
+       // stack.push(String.valueOf(displayPane.getText()));
+        jTextArea1.setText(String.valueOf(form.format(squared)));
+        }
+        
+        else if(n1 == 0){
+            jTextArea1.setText(String.valueOf(form.format(squared)));
+        }else
+        {
+            jTextArea1.setText("NaN");
+        }
+        }
+         catch(EmptyStackException e)
+        {
+           jTextArea1.setText("Syntax Error"); 
+        }
+        catch(NumberFormatException e)
+        {
+            jTextArea1.setText("Invalid Value");
+        }
+    }//GEN-LAST:event_squaredButtonActionPerformed
+
+    private void squaredNumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squaredNumButtonActionPerformed
+              flag = true;
+        double n1 = 0,n2 = 0, squared = 0;
+        
+        stack.push(jTextArea1.getText());
+        
+        try{
+       n1 = Double.parseDouble(stack.pop());
+        n2 = Double.parseDouble(stack.pop());
+        
+        
+        
+        //sum = n2 / n1;
+       // stack.push(String.valueOf(displayPane.getText()));
+        squared = Math.pow(n2, n1);
+           
+        jTextArea1.setText(String.valueOf(form.format(squared)));
+        
+        
+        
+        }
+         catch(EmptyStackException e)
+        {
+           jTextArea1.setText("Syntax Error"); 
+        }
+        catch(NumberFormatException e)
+        {
+            jTextArea1.setText("Invalid Value");
+        }
+    }//GEN-LAST:event_squaredNumButtonActionPerformed
+
+    private void squareRootButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareRootButtonActionPerformed
+                    flag = true;
+        double n1 = 0,n2 = 0, squared = 0;
+        
+        stack.push(jTextArea1.getText());
+        
+        try{
+       n1 = Double.parseDouble(stack.pop());
+        //n2 = Double.parseDouble(stack.pop());
+        
+        
+        if( n1 != 0 )
+            
+        {
+        //sum = n2 / n1;
+        //squared = n1*n1;
+        squared = Math.sqrt(n1);
+        
+       // stack.push(String.valueOf(displayPane.getText()));
+        jTextArea1.setText(String.valueOf(form.format(squared)));
+        }
+        
+        else if(n1 == 0){
+            jTextArea1.setText(String.valueOf(form.format(squared)));
+        }else
+        {
+            jTextArea1.setText("NaN");
+        }
+        }
+         catch(EmptyStackException e)
+        {
+           jTextArea1.setText("Syntax Error"); 
+        }
+        catch(NumberFormatException e)
+        {
+            jTextArea1.setText("Invalid Value");
+        }
+    }//GEN-LAST:event_squareRootButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1475,5 +1621,8 @@ public  void numbers(int num){
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton n;
     private javax.swing.JButton pButton;
+    private javax.swing.JButton squareRootButton;
+    private javax.swing.JButton squaredButton;
+    private javax.swing.JButton squaredNumButton;
     // End of variables declaration//GEN-END:variables
 }
