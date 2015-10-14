@@ -17,6 +17,7 @@ public class RnpCalculator extends javax.swing.JFrame {
     /**
      * Creates new form RnpCalculator
      */
+    //changed
     String[] storedValues;
     String display = "";
     int recall;
